@@ -1,0 +1,142 @@
+.details-header {
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  color: var(--primary);
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.details-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 2rem;
+  padding: 1.5rem;
+  border-radius: 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 22px 44px rgba(91, 92, 246, 0.18);
+}
+
+.details-artwork {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, #e0e7ff, #ccfbf1, #dcfce7);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.details-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artwork-fallback {
+  color: var(--primary);
+}
+
+.details-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.details-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.details-title h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.type-pill {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  background: linear-gradient(120deg, var(--primary), var(--accent));
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.artist {
+  margin: 0;
+  color: #312e81;
+}
+
+.collection,
+.description {
+  margin: 0;
+  color: var(--muted);
+}
+
+.details-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+  color: #312e81;
+}
+
+.details-meta .label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.preview-btn {
+  align-self: flex-start;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.7rem;
+  border: 1px solid var(--primary);
+  background: linear-gradient(120deg, var(--surface), var(--surface-2));
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.state-block {
+  padding: 2.5rem;
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  text-align: center;
+  color: var(--muted);
+}
+
+.state-block.error {
+  border-color: #fda4af;
+  color: #be123c;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  margin: 0 auto 1rem;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .details-card {
+    grid-template-columns: 1fr;
+  }
+}

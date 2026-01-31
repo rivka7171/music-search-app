@@ -1,0 +1,30 @@
+<section class="search-panel">
+  <div class="search-input">
+    <label class="sr-only" for="searchTerm">חיפוש</label>
+    <input
+      id="searchTerm"
+      type="text"
+      placeholder="חפש לפי אמן, שיר או אלבום"
+      [formControl]="queryControl"
+    />
+    <button type="button" class="ghost" (click)="clear.emit()">ניקוי</button>
+  </div>
+  <div class="search-tabs">
+    <button
+      type="button"
+      class="tab"
+      [class.active]="searchType === 'song'"
+      (click)="searchTypeChange.emit('song')"
+    >
+      שירים
+    </button>
+    <button
+      type="button"
+      class="tab"
+      [class.active]="searchType === 'album'"
+      (click)="searchTypeChange.emit('album')"
+    >
+      אלבומים
+    </button>
+  </div>
+</section>

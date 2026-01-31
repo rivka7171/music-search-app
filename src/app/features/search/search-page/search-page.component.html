@@ -1,0 +1,88 @@
+<div class="search-page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1 class="main-title">
+        <span class="title-icon">🎵</span>
+        מצא את השיר הבא שלך
+      </h1>
+      <p class="subtitle">חפש שירים או אלבומים. התוצאות מתעדכנות בזמן אמת.</p>
+    </div>
+  </header>
+
+  <section class="search-section">
+    <div class="search-container">
+      <app-search-bar
+        [queryControl]="queryControl"
+        [searchType]="searchTypeForUi()"
+        (searchTypeChange)="setSearchType($event)"
+        (clear)="clearSearch()"
+      />
+
+      @if (vm().resultsCount > 0) {
+        <div class="controls-row">
+          <div class="sort-bar">
+            <label class="sort-label" for="sortSelect">מיון לפי:</label>
+            <select
+              id="sortSelect"
+              class="sort-select"
+              [value]="vm().sortKey"
+              (change)="setSort($any($event.target).value)"
+            >
+              <option value="none">ללא מיון</option>
+              <option value="date_desc">תאריך (סדר יורד)</option>
+              <option value="date_asc">תאריך (סדר עולה)</option>
+              <option value="name_asc">שם (סדר עולה)</option>
+              <option value="name_desc">שם (סדר יורד)</option>
+            </select>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  @if (vm().historyItems.length > 0) {
+    <section class="history-section">
+      <app-search-history
+        [items]="vm().historyItems"
+        (selectTerm)="onHistorySelect($event)"
+      />
+    </section>
+  }
+
+  <section class="results-section">
+    <app-music-list
+      [items]="vm().items"
+      [query]="vm().query"
+      [loading]="vm().loading"
+      [loadingMore]="vm().loadingMore"
+      [error]="vm().errorMessage"
+    />
+    @if (vm().uiState === 'ready') {
+      <div class="load-more">
+        <span class="load-more__count">מוצגות {{ vm().resultsCount }} תוצאות</span>
+        @if (vm().loadingMore) {
+          <span class="load-more__loading">טוען עוד תוצאות...</span>
+        } @else if (!vm().canLoadMore) {
+          <span class="load-more__end">זה הכול — אין עוד תוצאות.</span>
+        }
+      </div>
+    }
+  </section>
+
+  <div
+    appInfiniteScrollTrigger
+    [enabled]="vm().canLoadMore"
+    [loading]="vm().loadingMore || vm().loading"
+    (reached)="onLoadMore()"
+    class="scroll-sentinel"
+  ></div>
+
+  @if (vm().loadMoreErrorMessage) {
+    <div class="load-more__error">
+      <span>{{ vm().loadMoreErrorMessage }}</span>
+      <button type="button" class="load-more__retry" (click)="onLoadMoreRetry()">
+        נסה שוב
+      </button>
+    </div>
+  }
+</div>

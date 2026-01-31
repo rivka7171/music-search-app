@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: transparent;
+  color: var(--text);
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.75rem clamp(1rem, 4vw, 3rem) 1rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(224, 231, 255, 0.55),
+    rgba(204, 251, 241, 0.45)
+  );
+  backdrop-filter: blur(10px);
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.app-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent), var(--success));
+  color: #fff;
+}
+
+.app-title {
+  letter-spacing: 0.02em;
+}
+
+.app-subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.app-main {
+  padding: 1.5rem clamp(1rem, 4vw, 3rem) 3rem;
+  background: rgba(255, 255, 255, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+}

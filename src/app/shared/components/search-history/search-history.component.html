@@ -1,0 +1,10 @@
+<section class="history-panel">
+  <div class="history-title">חיפושים אחרונים</div>
+  <div class="history-list">
+    @for (item of items; track item.timestamp) {
+      <button type="button" class="history-chip" (click)="selectTerm.emit(item.term)">
+        <span>{{ item.term }}</span>
+      </button>
+    }
+  </div>
+</section>

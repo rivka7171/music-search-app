@@ -1,0 +1,30 @@
+<article class="result-card">
+  <div class="artwork">
+    @if (item.imageUrl) {
+      <img [src]="item.imageUrl" [alt]="item.name" />
+    } @else {
+      <div class="artwork-fallback">אין תמונה</div>
+    }
+  </div>
+  <div class="card-body">
+    <div class="card-title">
+      <h3>{{ item.name }}</h3>
+      <span class="type-pill">{{ typeLabel }}</span>
+    </div>
+    <p class="artist">{{ item.artist }}</p>
+    @if (item.collectionName) {
+      <p class="collection">אלבום: {{ item.collectionName }}</p>
+    }
+    @if (item.description) {
+      <p class="description">{{ item.description }}</p>
+    }
+    <div class="meta">
+      @if (item.releaseDate) {
+        <span>{{ item.releaseDate | date: 'mediumDate' }}</span>
+      }
+    </div>
+  </div>
+  <div class="card-actions">
+    <a class="details-link" [routerLink]="['/details', item.id]">פרטים</a>
+  </div>
+</article>

@@ -1,0 +1,60 @@
+<div class="details-header">
+  <button type="button" class="back-link" (click)="onBack()">חזרה לתוצאות</button>
+</div>
+
+@if (loading()) {
+  <div class="state-block">
+    <div class="spinner"></div>
+    <p>טוען פרטים...</p>
+  </div>
+} @else if (error()) {
+  <div class="state-block error">
+    <p>{{ error() }}</p>
+  </div>
+} @else if (!item()) {
+  <div class="state-block">
+    <p>הפריט לא נמצא.</p>
+  </div>
+} @else {
+  <section class="details-card">
+    <div class="details-artwork">
+      @if (item()!.imageUrl) {
+        <img [src]="item()!.imageUrl" [alt]="item()!.name" />
+      } @else {
+        <div class="artwork-fallback">אין תמונה</div>
+      }
+    </div>
+    <div class="details-body">
+      <div class="details-title">
+        <h1>{{ item()!.name }}</h1>
+        <span class="type-pill">{{ item()!.type === 'song' ? 'שיר' : 'אלבום' }}</span>
+      </div>
+      <p class="artist">{{ item()!.artist }}</p>
+      @if (item()!.collectionName) {
+        <p class="collection">אלבום: {{ item()!.collectionName }}</p>
+      }
+      @if (item()!.description) {
+        <p class="description">{{ item()!.description }}</p>
+      }
+      <div class="details-meta">
+        @if (item()!.releaseDate) {
+          <div>
+            <span class="label">תאריך יציאה</span>
+            <span>{{ item()!.releaseDate | date: 'longDate' }}</span>
+          </div>
+        }
+      </div>
+      @if (item()!.previewUrl) {
+        <button type="button" class="preview-btn" (click)="togglePreview(item()!)">
+          @if (isPreviewPlaying() && isSelected(item()!.id)) {
+            עצירה
+          } @else if (isSelected(item()!.id)) {
+            המשך
+          } @else {
+            האזנה
+          }
+        </button>
+      }
+    </div>
+  </section>
+}

@@ -1,0 +1,43 @@
+<section class="results-panel">
+  <div class="results-header">
+    <h2>תוצאות</h2>
+    <span class="results-count">
+      @if (query) {
+        נמצאו {{ items.length }} תוצאות
+      } @else {
+        התחל לחפש כדי לראות תוצאות
+      }
+    </span>
+  </div>
+
+  @if (loading) {
+    <div class="state-block">
+      <div class="spinner"></div>
+      <p>טוען תוצאות...</p>
+    </div>
+  } @else if (error) {
+    <div class="state-block error">
+      <p>{{ error }}</p>
+    </div>
+  } @else if (!query) {
+    <div class="state-block">
+      <p>הקלד חיפוש כדי לראות שירים או אלבומים.</p>
+    </div>
+  } @else if (items.length === 0) {
+    <div class="state-block">
+      <p>לא נמצאו תוצאות. נסה ניסוח אחר.</p>
+    </div>
+  } @else {
+    <div class="results-grid">
+      @for (item of items; track item.id) {
+        <app-music-card [item]="item" />
+      }
+      @if (loadingMore) {
+        <div class="load-more-card">
+          <div class="spinner"></div>
+          <p>טוען עוד תוצאות...</p>
+        </div>
+      }
+    </div>
+  }
+</section>

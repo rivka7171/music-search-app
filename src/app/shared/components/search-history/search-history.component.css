@@ -1,0 +1,28 @@
+.history-panel {
+  margin-top: 1.5rem;
+}
+
+.history-title {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.history-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.history-chip {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: linear-gradient(120deg, var(--surface), var(--surface-2), #ecfeff);
+  color: var(--primary);
+  cursor: pointer;
+}
+
