@@ -129,6 +129,29 @@
   cursor: pointer;
 }
 
+.page-loading {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  color: #374151;
+  font-size: 0.9rem;
+  z-index: 1000;
+}
+
+.page-loading .spinner {
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+}
+
 .scroll-sentinel {
   height: 4px;
   width: 100%;

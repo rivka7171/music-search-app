@@ -85,4 +85,11 @@
       </button>
     </div>
   }
+
+  @if (vm().loadingMore) {
+    <div class="page-loading" aria-label="טוען עוד תוצאות">
+      <div class="spinner"></div>
+      <span>טוען עוד תוצאות...</span>
+    </div>
+  }
 </div>

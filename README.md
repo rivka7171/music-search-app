@@ -169,13 +169,12 @@ No backend is required.
 ## Repository
 
 Public Repository:  
-https://github.com/USERNAME/REPO
+https://github.com/rivka7171/music-search-app.git    
 
-Includes full commit history demonstrating incremental feature development.
-
+ 
 ## Live Demo
 
-https://your-live-demo-link
+https://music-search-app-rivka-nwwahgzfq-rivka-breuers-projects.vercel.app/
 
 Demonstrates:
 

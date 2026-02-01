@@ -49,10 +49,7 @@ export class SearchPageComponent {
     sortKey: this.store.sortKey()
   }));
 
-  readonly searchTypeForUi = computed(() => {
-    const type = this.store.searchType();
-    return type === 'both' ? 'song' : type;
-  });
+  readonly searchTypeForUi = computed(() => this.store.searchType());
 
   constructor() {
     effect(() => {
@@ -60,7 +57,7 @@ export class SearchPageComponent {
     });
   }
 
-  setSearchType(type: 'song' | 'album' | 'both'): void {
+  setSearchType(type: 'song' | 'album'): void {
     this.store.setSearchType(type);
   }
 

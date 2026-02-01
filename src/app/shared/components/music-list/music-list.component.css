@@ -56,13 +56,3 @@
   justify-content: center;
 }
 
-.load-more-card {
-  display: grid;
-  place-items: center;
-  gap: 0.6rem;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background: var(--surface);
-  border: 1px dashed var(--border);
-  color: var(--muted);
-}

@@ -32,12 +32,6 @@
       @for (item of items; track item.id) {
         <app-music-card [item]="item" />
       }
-      @if (loadingMore) {
-        <div class="load-more-card">
-          <div class="spinner"></div>
-          <p>טוען עוד תוצאות...</p>
-        </div>
-      }
     </div>
   }
 </section>

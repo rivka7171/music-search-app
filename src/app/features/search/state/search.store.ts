@@ -15,7 +15,7 @@ import { MusicItem } from '../../../core/models/music-item';
 import { ItunesService } from '../../../core/services/itunes.service';
 import { SearchHistoryService } from '../../../core/services/search-history.service';
 
-type SearchType = 'song' | 'album' | 'both';
+type SearchType = 'song' | 'album';
 type UiState = 'idle' | 'loading' | 'error' | 'empty' | 'ready';
 type SortKey = 'none' | 'date_desc' | 'date_asc' | 'name_asc' | 'name_desc';
 type SearchRequest = {
@@ -124,8 +124,7 @@ export class SearchStore {
           return this.searchByType(query, type, offset).pipe(
             tap((items) => {
               const pageSize = this.pageSize();
-              const rawItems = this.dedupeById(items);
-              const pageSlice = rawItems.slice(offset, offset + pageSize);
+              const pageSlice = items.slice(offset, offset + pageSize);
               const batchCount = pageSlice.length;
               this.lastBatchSize.set(batchCount);
 
@@ -133,13 +132,13 @@ export class SearchStore {
                 this.items.set(this.dedupeById([...this.items(), ...pageSlice]));
                 this.offset.set(offset + batchCount);
               } else {
-                this.items.set(rawItems.slice(0, pageSize));
-                this.offset.set(Math.min(pageSize, rawItems.length));
+                this.items.set(this.dedupeById(items.slice(0, pageSize)));
+                this.offset.set(Math.min(pageSize, items.length));
               }
 
-              this.updateCanLoadMore(batchCount, type);
+              this.updateCanLoadMore(batchCount);
 
-              if (!append && query.length >= 2 && rawItems.length > 0) {
+              if (!append && query.length >= 2 && items.length > 0) {
                 this.historyService.add(query);
               }
             }),
@@ -250,19 +249,11 @@ export class SearchStore {
       return this.itunes.searchSongs(query, limit, 0);
     }
 
-    if (type === 'album') {
-      return this.itunes.searchAlbums(query, limit, 0);
-    }
-
-    return forkJoin({
-      songs: this.itunes.searchSongs(query, limit, 0),
-      albums: this.itunes.searchAlbums(query, limit, 0)
-    }).pipe(map(({ songs, albums }) => [...songs, ...albums]));
+    return this.itunes.searchAlbums(query, limit, 0);
   }
 
-  private updateCanLoadMore(batchSize: number, type: SearchType): void {
-    const expected = type === 'both' ? this.pageSize() * 2 : this.pageSize();
-    this.canLoadMore.set(batchSize >= expected);
+  private updateCanLoadMore(batchSize: number): void {
+    this.canLoadMore.set(batchSize >= this.pageSize());
   }
 
   private dedupeById(items: MusicItem[]): MusicItem[] {
